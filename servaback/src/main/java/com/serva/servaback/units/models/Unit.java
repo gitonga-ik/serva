@@ -1,6 +1,6 @@
 package com.serva.servaback.units.models;
 
-import com.serva.servaback.units.UnitType;
+import com.serva.servaback.units.enums.UnitType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(
-        name = "unit"
+        name = "serva_hse_unit"
 )
 @Setter
 @Getter
@@ -24,8 +24,9 @@ public class Unit {
     @Column(name = "unit_number", length = 10, nullable = false)
     private String unitNumber;
 
+    @Builder.Default
     @Column(name = "unit_type", nullable = false)
-    private UnitType unitType;
+    private UnitType unitType = UnitType.TWO_BEDROOM;
 
     @Column(name = "unit_price",  nullable = false)
     private Double unitPrice;
@@ -33,16 +34,11 @@ public class Unit {
     @Column(name = "occupied", nullable = false)
     private Boolean occupied;
 
-    @Column(name = "date_cr", insertable = false, updatable = false)
+    @Column(name = "date_cr", updatable = false)
     private LocalDateTime dateCr;
 
-    @Column(name = "date_lu", insertable = false, updatable = false)
+    @Column(name = "date_lu", nullable = false)
     private LocalDateTime dateLu;
-
-    @PrePersist
-    public void prePersist() {
-        this.dateCr = LocalDateTime.now();
-    }
 
     @PrePersist
     protected void onCreate() {

@@ -1,4 +1,4 @@
-package com.serva.servaback.units;
+package com.serva.servaback.units.enums;
 
 public enum UnitType {
     SINGLE,
